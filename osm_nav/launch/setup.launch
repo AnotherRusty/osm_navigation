@@ -1,0 +1,25 @@
+<launch>
+
+  <param name="/use_sim_time" value="true" />
+
+  <include file="$(find robot_localization)/launch/use_sensor_GPS_INS_2D_trajectory_view.launch" > <!--这里接受了gps信息 发出了odom filtter信号 是通过gps信号积分出来的路径 同时发出了两个tf转换 odom到base_link -->
+  </include>
+
+
+  <!--启动串口控制速度-->
+  <node pkg="my_serial" type="car_base_controller" name="car_base_controller" output="screen"> <!--这里订阅cmd_vel的topic-->
+    <param name="port" value="/dev/ttyUSB0" />
+  </node>
+  <!--打开fake odomertry 提供odom与base_link信息-->
+  <!--node pkg="my_serial" type="fake_odometry" name="provide_odom" output="screen"/--> <!--这里用速度积分 得到odom信息-->
+
+  <!--打开串口 接受激光信息 提供激光雷达信息-->
+  <node pkg="laser_node" type="laser_node" name="laser_node" output="screen"/> <!--发出scan的信号-->
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="link1_broadcaster" args="0 0 0.65 0 0 0 base_link laser " />
+  <node pkg="tf2_ros" type="static_transform_publisher" name="link4_broadcaster" args="0 0 0 0 0 0 map odom " />
+
+
+  <node name="rviz" pkg="rviz" type="rviz"/>
+
+</launch>

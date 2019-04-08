@@ -1,0 +1,13 @@
+<launch>
+  <master auto="start"/>
+
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find osm_nav)/maps/blank_map.yaml" />
+  
+  <!-- move_base -->
+  <include file="$(find osm_nav)/include/move_base.launch.xml" /> 
+
+  <node name="osm_helper" pkg="osm_planner" type="osm_helper" ns="move_base"/>
+
+  <!--node name="rviz" pkg="rviz" type="rviz" args="-d $(find osm_planner)/rviz/routes.rviz" required="true"/-->
+</launch>
+
