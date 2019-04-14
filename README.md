@@ -14,3 +14,11 @@ STEP 2: 运行导航
 ```bash
 $ roslaunch osm_nav nav.launch
 ```
+
+---
+## TIPS
+把source添加到.bashrc 就不需要每次都手动打了。
+```bash
+echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+```
+
