@@ -3,13 +3,18 @@
    <arg name="osm_map_path" default="$(find osm_planner)/osm_example/qinhuimap.osm"/>
 
    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen" required="true">
-      <rosparam file="$(find  osm_nav)/params/move_base_params.yaml"  command="load" />
-      <rosparam file="$(find  osm_nav)/params/base_local_planner_params.yaml"    command="load" /><!--局部路径规划参数 -->
-      <rosparam file="$(find  osm_nav)/params/local_costmap_params.yaml"    command="load" /><!--局部路径规划参数 -->
-      <rosparam file="$(find  osm_nav)/params/costmap_common_params.yaml"    command="load" /><!--局部路径规划参数 -->
-      <param name="Planner/osm_map_path" value="$(arg osm_map_path)"/> <!--在planner中有一个osm_path的路径，用来传给movebase做路径规划的所以主要是修改这里的路径之后再修改ros_param的参数吗 改了也不对啊/-->
+      <param name="base_global_planner" value="osm_planner/Planner"/>
+      <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS"/>
+      <rosparam file="$(find  osm_planner)/config/base_local_planner_params.yaml"    command="load" />
+      <rosparam file="$(find  osm_planner)/config/local_costmap_params.yaml"    command="load" />
+      <rosparam file="$(find  osm_planner)/config/costmap_common_params1.yaml"    command="load" />
+      <param name="controller_frequency" value="1"/>
+      <param name="Planner/osm_map_path" value="$(arg osm_map_path)"/> 
       <remap from="/odom" to="/odom"/>
-      <rosparam file="$(find osm_nav)/params/ros_param.yaml" command="load" /><!--全局规划的参数设置，这个全局规划 包括planner 地图解析器 具体的不知道 但是通过这个planner得出了一条nav/path的路径，局部地图的没有设置 是保持默认了吗-->
+      <rosparam file="$(find osm_planner)/config/ros_param.yaml" command="load" />
    </node>
-   
+
+   <rosparam command="load" file="$(find osm_planner)/test/test_fei.yaml"/>
+
 </launch>
+

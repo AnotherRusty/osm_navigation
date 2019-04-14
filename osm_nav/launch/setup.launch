@@ -19,7 +19,6 @@
   <node pkg="tf2_ros" type="static_transform_publisher" name="link1_broadcaster" args="0 0 0.65 0 0 0 base_link laser " />
   <node pkg="tf2_ros" type="static_transform_publisher" name="link4_broadcaster" args="0 0 0 0 0 0 map odom " />
 
-
   <node name="rviz" pkg="rviz" type="rviz"/>
 
 </launch>

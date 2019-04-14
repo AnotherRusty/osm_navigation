@@ -1,13 +1,15 @@
 <launch>
-  <master auto="start"/>
+  <param name="/use_sim_time" value="false" />
 
   <node name="map_server" pkg="map_server" type="map_server" args="$(find osm_nav)/maps/blank_map.yaml" />
   
   <!-- move_base -->
   <include file="$(find osm_nav)/include/move_base.launch.xml" /> 
 
-  <node name="osm_helper" pkg="osm_planner" type="osm_helper" ns="move_base"/>
+  <node name="fake_localization" pkg="fake_localization" type="fake_localization" >
+    <rosparam file="$(find osm_nav)/params/fake_localization_params.yaml" command="load"/>
+  </node>
 
-  <!--node name="rviz" pkg="rviz" type="rviz" args="-d $(find osm_planner)/rviz/routes.rviz" required="true"/-->
+  <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find osm_planner)/rviz/routes.rviz" required="true"/> -->
 </launch>
 
