@@ -5,10 +5,12 @@
    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen" required="true">
       <param name="base_global_planner" value="osm_planner/Planner"/>
       <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS"/>
-      <rosparam file="$(find  osm_nav)/params/base_local_planner_params.yaml"    command="load" />
-      <rosparam file="$(find  osm_nav)/config/local_costmap_params.yaml"    command="load" />
-      <rosparam file="$(find  osm_nav)/config/costmap_common_params.yaml"    command="load"  ns="local_costmap" />
+      <rosparam file="$(find  osm_planner)/config/base_local_planner_params.yaml"    command="load" />
+      <rosparam file="$(find  osm_planner)/config/local_costmap_params.yaml"    command="load" />
+      <rosparam file="$(find  osm_planner)/config/costmap_common_params1.yaml"    command="load" />
+      <param name="controller_frequency" value="1"/>
       <param name="Planner/osm_map_path" value="$(arg osm_map_path)"/> 
+      <remap from="/odom" to="/odom"/>
       <rosparam file="$(find osm_planner)/config/ros_param.yaml" command="load" />
    </node>
 
