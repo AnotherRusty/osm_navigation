@@ -17,7 +17,7 @@ def certain_obstacle(angle, span, dist):
 
 def random_obstacle():
     mid = random.randint(0, 360)
-    span = random.ranint(1, 5)
+    span = random.randint(1, 5)
     left = mid - span
     right = mid + span
     distance = random.uniform(0.3, 2.5)
