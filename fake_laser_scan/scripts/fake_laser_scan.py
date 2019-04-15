@@ -56,7 +56,7 @@ while not rospy.is_shutdown():
     if rospy.Time.now() > next_time:
         scan.header.stamp = rospy.Time.now()
         # obstacles = [random_obstacle() for i in range(10)]   # random n obstacles
-        obstacles = [certain_obstacle(0, 5, 2.0)]
+        obstacles = [certain_obstacle(0, 15, 2.0)]
         scan.ranges = get_scan(obstacles)
         scan_pub.publish(scan)
         next_time += rospy.Duration(OBSTACLE_INTERVAL)
