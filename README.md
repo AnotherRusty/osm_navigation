@@ -9,8 +9,12 @@ STEP 1: 运行 rbx1 模拟机器人
 ```bash
 $ roslaunch rbx1_bringup fake_turtlebot.launch
 ```
+STEP 2: 运行模拟雷达
+```bash
+$ roslaunch fake_laser_scan fake_laser_scan.launch
+```
 
-STEP 2: 运行导航
+STEP 3: 运行导航
 ```bash
 $ roslaunch osm_nav nav.launch
 ```
