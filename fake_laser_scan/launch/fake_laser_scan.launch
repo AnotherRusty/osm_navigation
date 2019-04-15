@@ -1,6 +1,6 @@
 <launch>
 
     <node name='fake_laser_scan' pkg='fake_laser_scan' type='fake_laser_scan.py' />
-    <node pkg="tf" type="static_transform_publisher" name="laser2base_broadcaster" args="0.0 0.0 0.2 0.0 0.0 0.0 0.0 /base_link /laser_frame 100" />
+    <node pkg="tf" type="static_transform_publisher" name="laser2base_broadcaster" args="0.0 0.0 0.2 1 0 0 0 /base_link /laser_frame 100" />
 
 </launch>

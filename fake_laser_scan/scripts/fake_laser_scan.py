@@ -23,7 +23,8 @@ def get_scan(obstacles):
         right = mid + 3
         dist = obstacle[1]
         for angle in range(left, right):
-            ranges[anlge] = dist
+            index = (angle+360)%360
+            ranges[index] = dist
     return ranges
 
 
