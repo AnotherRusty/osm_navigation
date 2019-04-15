@@ -16,12 +16,12 @@ obstacle_layer:
     marking: true
     clearing: true
     min_obstacle_height: 0.05
-    max_obstacle_height: 0.35
+    max_obstacle_height: 0.50
 
 inflation_layer:
   enabled:              true
-  cost_scaling_factor:  2.5  # exponential rate at which the obstacle cost drops off (default: 10)
-  inflation_radius:     1.2 
+  cost_scaling_factor:  10  # exponential rate at which the obstacle cost drops off (default: 10)
+  inflation_radius:     0.5 
  
 static_layer:
   enabled: true

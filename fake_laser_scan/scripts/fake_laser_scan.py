@@ -8,20 +8,28 @@ import random
 MAX_RANGE = 20.0
 OBSTACLE_INTERVAL = 3.0   # new obstacles per ? sec
 
+def certain_obstacle(angle, span, dist):
+    left = angle - span
+    right = angle + span
+    distance = dist
+    return (left, right, distance)
+
 
 def random_obstacle():
-    obstacle_angle = random.randint(0, 360)
-    obstacle_distance = random.uniform(0.3, 2.5)
-    return (obstacle_angle, obstacle_distance)
+    mid = random.randint(0, 360)
+    span = random.ranint(1, 5)
+    left = mid - span
+    right = mid + span
+    distance = random.uniform(0.3, 2.5)
+    return (left, right, distance)
 
 
 def get_scan(obstacles):
     ranges = [float('inf') for i in range(360)]
     for obstacle in obstacles:
-        mid = obstacle[0]   # obstacle mid angle
-        left = mid - 3    # width +/-5 degrees
-        right = mid + 3
-        dist = obstacle[1]
+        left = obstacle[0]
+        right = obstacle[1]
+        dist = obstacle[2]
         for angle in range(left, right):
             index = (angle+360)%360
             ranges[index] = dist
@@ -45,7 +53,9 @@ rate = rospy.Rate(30)
 next_time = rospy.Time.now()
 
 while not rospy.is_shutdown():
+    scan.header.stamp = rospy.Time.now()
     obstacles = [random_obstacle() for i in range(3)]   # random 3 obstacles
+    # obstacles = [certain_obstacle(45, 3, 1.2)]
     if rospy.Time.now() > next_time:
         scan.ranges = get_scan(obstacles)
         next_time += rospy.Duration(3.0)
