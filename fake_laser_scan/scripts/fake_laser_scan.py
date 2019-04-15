@@ -34,7 +34,7 @@ scan_pub = rospy.Publisher('scan', LaserScan, queue_size=10)
 
 scan = LaserScan()
 scan.header.stamp = rospy.Time.now()
-scan.header.frame_id = 'laser_frame'
+scan.header.frame_id = 'laser'
 scan.angle_min = 0.0
 scan.angle_max = 2 * pi
 scan.angle_increment = pi / 180.0
