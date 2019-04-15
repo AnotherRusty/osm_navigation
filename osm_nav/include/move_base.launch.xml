@@ -6,8 +6,8 @@
       <param name="base_global_planner" value="osm_planner/Planner"/>
       <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS"/>
       <rosparam file="$(find  osm_nav)/params/base_local_planner_params.yaml"    command="load" />
-      <rosparam file="$(find  osm_nav)/config/local_costmap_params.yaml"    command="load" />
-      <rosparam file="$(find  osm_nav)/config/costmap_common_params.yaml"    command="load"  ns="local_costmap" />
+      <rosparam file="$(find  osm_nav)/params/local_costmap_params.yaml"    command="load" />
+      <rosparam file="$(find  osm_nav)/params/costmap_common_params.yaml"    command="load"  ns="local_costmap" />
       <param name="Planner/osm_map_path" value="$(arg osm_map_path)"/> 
       <rosparam file="$(find osm_planner)/config/ros_param.yaml" command="load" />
    </node>
