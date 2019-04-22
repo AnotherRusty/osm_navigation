@@ -1,7 +1,7 @@
 <launch>
   <param name="/use_sim_time" value="false" />
 
-  <node name="map_server" pkg="map_server" type="map_server" args="$(find osm_nav)/maps/blank_map.yaml" />
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find osm_nav)/maps/blank.yaml" />
   
   <!-- move_base -->
   <include file="$(find osm_nav)/include/move_base.launch.xml" /> 

@@ -10,28 +10,25 @@ TrajectoryPlannerROS:
   acc_lim_x: 2.5
   acc_lim_y: 0
 
-# Forward Simulation Parameters
-  sim_time: 2.0    # 1.7
-  sim_granularity: 0.025
-  vx_samples: 6    # default 3
-  vy_samples: 1    # diff drive robot, there is only one sample
-  vth_samples: 20  # 20
-  controller_frequency: 3.0
-
-  goal_distance_bias: 0.4 #全局和局部的比例，我觉得还是应该全局为重，这个值越大，那么越有那个起步的大圈?
-  path_distance_bias: 0.8
+# Goal Tolerance Parameters
   xy_goal_tolerance: 0.5
   yaw_goal_tolerance: 0.3
+  # latch_xy_goal_tolerance: false
 
-  dwa: false
+# Forward Simulation Parameters
+  sim_time: 2.0    # 1.7
+  vx_samples: 10   # default 3
+  vy_samples: 1    # diff drive robot, there is only one sample
+  vth_samples: 20  # 20
 
-  holonomic_robot: false
 # Trajectory Scoring Parameters
-  path_distance_bias: 90.0      # 32.0
+  path_distance_bias: 32.0      # 32.0
   goal_distance_bias: 24.0      # 24.0
-  occdist_scale: 0.3            # 0.01
+  occdist_scale: 0.4            # 0.01
   forward_point_distance: 0.325 # 0.325
   stop_time_buffer: 0.2         # 0.2
-  scaling_speed: 0.20           # 0.25
+  scaling_speed: 0.25           # 0.25
   max_scaling_factor: 0.2       # 0.2
-  publish_cost_grid: false
+
+# Differential-drive robot configuration
+  holonomic_robot: false

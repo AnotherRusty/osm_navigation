@@ -6,7 +6,7 @@ from math import pi
 import random
 
 MAX_RANGE = 20.0
-OBSTACLE_INTERVAL = 3.0   # new obstacles per ? sec
+OBSTACLE_INTERVAL = 10.0   # new obstacles per n sec
 
 def certain_obstacle(angle, span, dist):
     left = angle - span
@@ -20,7 +20,7 @@ def random_obstacle():
     span = random.randint(1, 5)
     left = mid - span
     right = mid + span
-    distance = random.uniform(0.3, 2.5)
+    distance = random.uniform(0.5, 5.0)
     return (left, right, distance)
 
 
@@ -53,13 +53,12 @@ rate = rospy.Rate(30)
 next_time = rospy.Time.now()
 
 while not rospy.is_shutdown():
-    scan.header.stamp = rospy.Time.now()
-    obstacles = [random_obstacle() for i in range(3)]   # random 3 obstacles
-    # obstacles = [certain_obstacle(45, 3, 1.2)]
     if rospy.Time.now() > next_time:
+        scan.header.stamp = rospy.Time.now()
+        obstacles = [random_obstacle() for i in range(10)]   # random n obstacles
         scan.ranges = get_scan(obstacles)
-        next_time += rospy.Duration(3.0)
+        scan_pub.publish(scan)
+        next_time += rospy.Duration(OBSTACLE_INTERVAL)
 
-    scan_pub.publish(scan)
     rate.sleep()
     
