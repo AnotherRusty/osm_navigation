@@ -26,7 +26,7 @@ def random_obstacle():
 
 def get_scan(obstacles):
     ranges = [float('inf') for i in range(360)]
-    for obstacle in obstacles:
+    for obstacle in obstacles:  #[(l1, r2, d1), (l2, r2, d2)]
         left = obstacle[0]
         right = obstacle[1]
         dist = obstacle[2]
@@ -35,10 +35,9 @@ def get_scan(obstacles):
             ranges[index] = dist
     return ranges
 
-
+# main
 rospy.init_node('fake_laser_scan', anonymous=False)
 scan_pub = rospy.Publisher('scan', LaserScan, queue_size=10)
-
 
 scan = LaserScan()
 scan.header.stamp = rospy.Time.now()
@@ -52,10 +51,12 @@ scan.range_max = MAX_RANGE
 rate = rospy.Rate(30)
 next_time = rospy.Time.now()
 
+
 while not rospy.is_shutdown():
     if rospy.Time.now() > next_time:
         scan.header.stamp = rospy.Time.now()
-        obstacles = [random_obstacle() for i in range(10)]   # random n obstacles
+        # obstacles = [random_obstacle() for i in range(10)]   # random n obstacles
+        obstacles = [certain_obstacle(0, 5, 2.0)]
         scan.ranges = get_scan(obstacles)
         scan_pub.publish(scan)
         next_time += rospy.Duration(OBSTACLE_INTERVAL)
