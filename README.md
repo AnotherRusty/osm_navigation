@@ -1,7 +1,12 @@
 # osm_navigation
 
 ### 更新：
-launch文件取消了osm_helper节点, 增加fake_localization节点，发布odom->map的tf关系
+2019-04-27
+* 修改params/base_local_planner_params.yaml中occdist_scale (0.4 -> 0.02). (参考文献：http://kaiyuzheng.me/documents/navguide.pdf ）
+* 增大fake_laser_scan节点中障碍物的大小(span 5->15).
+
+2019-04-15
+* launch文件取消了osm_helper节点, 增加fake_localization节点，发布odom->map的tf关系
 
 
 ### 使用方法：
